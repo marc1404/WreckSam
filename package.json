@@ -13,5 +13,11 @@
     "Marc Vornetran"
   ],
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "serve": "serve"
+  },
+  "devDependencies": {
+    "serve": "6.2.0"
+  }
 }

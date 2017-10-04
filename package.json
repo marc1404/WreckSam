@@ -1,0 +1,17 @@
+{
+  "name": "wreck-sam",
+  "version": "0.0.1",
+  "description": "Wreck Sam, Intelligent Interactive Systems, University of Amsterdam",
+  "main": "index.js",
+  "repository": "https://github.com/marc1404/WreckSam.git",
+  "author": "Carte Blanche",
+  "contributors": [
+    "Gokie Wiegers",
+    "Jerom Fernig",
+    "Jop Brandenburg",
+    "Maaike Koolbergen",
+    "Marc Vornetran"
+  ],
+  "license": "MIT",
+  "private": true
+}

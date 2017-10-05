@@ -7,8 +7,7 @@ module.exports = env => {
     return {
         entry: './src/index.js',
         output: {
-            filename: 'app.js',
-            path: path.resolve(__dirname, 'assets/js')
+            filename: 'app.js'
         },
         module: {
             rules: [
@@ -19,7 +18,12 @@ module.exports = env => {
                     options: {
                         cacheDirectory: true
                     }
-                }
+                },
+                {
+                    test: /\.vue$/,
+                    include: path.resolve(__dirname, 'src'),
+                    loader: 'vue-loader'
+                },
             ]
         },
         plugins: [

@@ -5,7 +5,7 @@
         </transition>
 
         <div class="mt-auto">
-            <button type="button" class="btn btn-primary btn-block btn-lg mb-3" @click="next">Next</button>
+            <button type="button" class="btn btn-primary btn-block btn-lg mb-3" @click="next" :disabled="isNextDisabled">Next</button>
 
             <div class="text-center">
                 <i class="fa fa-fw fa-lg fa-circle transition-color" :class="nameCircleClass" @click="toNameScreen"></i>
@@ -16,8 +16,15 @@
 </template>
 
 <script>
+    import { userStateService } from '../states';
+
     export default {
         name: 'SetupScreen',
+        data() {
+            return {
+                userState: userStateService.getUserState()
+            };
+        },
         computed: {
             nameCircleClass() {
                 return this.$route.name === 'SetupNameScreen' ? 'text-primary' : 'text-secondary';
@@ -27,6 +34,19 @@
             },
             transition() {
                 return this.$route.name === 'SetupNameScreen' ? 'slide-right' : 'slide-left';
+            },
+            isNextDisabled() {
+                const routeName = this.$route.name;
+
+                if (routeName === 'SetupNameScreen') {
+                    return !this.userState.name;
+                }
+
+                if (routeName === 'SetupAgeScreen') {
+                    return !this.userState.age;
+                }
+
+                return false;
             }
         },
         methods: {
@@ -34,6 +54,10 @@
                 this.$router.push({ name: 'SetupNameScreen' });
             },
             toAgeScreen() {
+                if (!this.userState.name) {
+                    return false;
+                }
+
                 this.$router.push({ name: 'SetupAgeScreen' });
             },
             next() {

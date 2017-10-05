@@ -5,18 +5,20 @@
 
         <div class="row">
             <div class="col-8 mx-auto">
-                <input type="text" class="form-control form-control-lg text-center" placeholder="First Name" v-model="name">
+                <input type="text" class="form-control form-control-lg text-center" placeholder="First Name" v-model="userState.name">
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import { userStateService } from '../states';
+
     export default {
         name: 'SetupNameScreen',
         data() {
             return {
-                name: null
+                userState: userStateService.getUserState()
             };
         }
     };

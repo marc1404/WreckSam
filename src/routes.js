@@ -1,6 +1,10 @@
 import SplashScreen from './SplashScreen.vue';
 import { SetupLayout, SetupNameScreen, SetupAgeScreen } from './setup';
 import MainMenuScreen from './MainMenuScreen.vue';
+import PlayScreen from './PlayScreen.vue';
+import TutorialScreen from './TutorialScreen.vue';
+import SettingsScreen from './SettingsScreen.vue';
+import CreditsScreen from './CreditsScreen.vue';
 
 export default [
     {
@@ -40,5 +44,37 @@ export default [
         meta: {
             order: 3
         }
-    }
+    },
+    {
+        path: '/play',
+        name: 'PlayScreen',
+        component: PlayScreen,
+        meta: {
+            order: 4
+        }
+    },
+    {
+        path: '/tutorial',
+        name: 'TutorialScreen',
+        component: TutorialScreen,
+        meta: {
+            order: 4
+        }
+    },
+    {
+        path: '/settings',
+        name: 'SettingsScreen',
+        component: SettingsScreen,
+        meta: {
+            order: 4
+        }
+    },
+    {
+        path: '/credits',
+        name: 'CreditsScreen',
+        component: CreditsScreen,
+        meta: {
+            order: 4
+        }
+    },
 ];

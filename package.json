@@ -16,7 +16,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack --env.production"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",

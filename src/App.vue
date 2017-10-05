@@ -1,5 +1,5 @@
 <template>
-    <div class="row h-100">
+    <div class="row h-100 m-0">
         <div class="col-12 col-lg-6 col-xl-4 mx-auto h-100">
             <transition :name="transition" mode="out-in">
                 <router-view></router-view>

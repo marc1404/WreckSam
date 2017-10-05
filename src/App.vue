@@ -1,6 +1,6 @@
 <template>
-    <div class="row h-100 m-0">
-        <div class="col-12 col-lg-6 col-xl-4 mx-auto h-100">
+    <div class="row h-100 m-0 overflow-hidden">
+        <div class="col-12 col-lg-6 col-xl-4 mx-auto h-100 overflow-hidden">
             <transition :name="transition" mode="out-in">
                 <router-view></router-view>
             </transition>
@@ -33,7 +33,7 @@
         height: 100%;
     }
 
-    body {
+    body, .overflow-hidden {
         overflow: hidden;
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <img class="img-fluid splash-animation" @animationend="nextScreen" src="/assets/images/splash.jpg" />
+        <img class="img-fluid splash-animation" @animationend="nextScreen" src="assets/images/splash.jpg" />
     </div>
 </template>
 

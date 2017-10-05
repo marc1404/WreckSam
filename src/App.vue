@@ -22,7 +22,7 @@
             }
         },
         created() {
-            this.$router.push({ name: 'MainMenuScreen' });
+            this.$router.push({ name: 'SplashScreen' });
         }
     };
 </script>

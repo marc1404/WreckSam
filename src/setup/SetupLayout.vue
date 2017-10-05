@@ -64,6 +64,7 @@
                 const name = this.$route.name === 'SetupNameScreen' ? 'SetupAgeScreen' : 'MainMenuScreen';
 
                 this.$router.push({ name: name });
+                userStateService.save();
             }
         }
     };

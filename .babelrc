@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "flow",
+    ["env", {
+      "targets": {
+        "browsers": [
+          "IE 11"
+        ],
+        "uglify": false
+      },
+      "useBuiltIns": true,
+      "modules": false
+    }]
+  ]
+}

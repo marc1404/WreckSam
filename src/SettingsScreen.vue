@@ -4,17 +4,18 @@
             <i class="fa fa-fw fa-wrench"></i>
             Settings
         </h1>
-
+        
+      <!--   <router-link :to="{ name: 'SetupNameScreen' }" class="btn btn-light btn-sm">
+            <i class="fa fa-fw fa-pencil"></i>
+            Change
+        </router-link> -->
+        
         <div>
             <h2>
                 <i class="fa fa-fw fa-user-md"></i>
                 Name
             </h2>
-            <p class="lead">{{ userState.name }}</p>
-            <router-link :to="{ name: 'SetupNameScreen' }" class="btn btn-light btn-sm">
-                <i class="fa fa-fw fa-pencil"></i>
-                Change
-            </router-link>
+            <input type="text" class="form-control form-control-lg text-center" v-model="userState.name">
         </div>
 
         <div>
@@ -22,11 +23,8 @@
                 <i class="fa fa-fw fa-birthday-cake"></i>
                 Age
             </h2>
-            <p class="lead">{{ userState.age }}</p>
-            <router-link :to="{ name: 'SetupAgeScreen' }" class="btn btn-light btn-sm">
-                <i class="fa fa-fw fa-pencil"></i>
-                Change
-            </router-link>
+            <input type="text" class="form-control form-control-lg text-center" v-model="userState.age">
+
         </div>
 
         <div>
@@ -39,7 +37,7 @@
         <div>
             <router-link :to="{ name: 'MainMenuScreen' }" class="btn btn-dark btn-lg w-200px">
                 <i class="fa fa-fw fa-chevron-left"></i>
-                Back
+                Save and back
             </router-link>
         </div>
     </div>

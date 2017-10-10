@@ -38,6 +38,13 @@ class UserStateService {
         }
     }
 
+    reset() {
+        this.userState.name = null;
+        this.userState.age = null;
+
+        localStorage.removeItem('UserState');
+    }
+
 }
 
 export default new UserStateService();

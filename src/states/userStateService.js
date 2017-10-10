@@ -1,6 +1,6 @@
 // @flow
 import UserState from './UserState';
-import Raven from 'raven';
+import Raven from 'raven-js';
 
 class UserStateService {
 

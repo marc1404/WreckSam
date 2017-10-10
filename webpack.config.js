@@ -51,7 +51,7 @@ function productionPlugins(enable) {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),
-                RELEASE: new Date().toISOString()
+                RELEASE: JSON.stringify(new Date().toISOString())
             }
         }),
         new webpack.LoaderOptionsPlugin({

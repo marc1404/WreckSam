@@ -22,7 +22,9 @@
             }
         },
         created() {
-            this.$router.push({ name: 'SettingsScreen' });
+            const startScreen = localStorage.getItem('StartScreen') || 'SplashScreen';
+
+            this.$router.push({ name: startScreen });
         }
     };
 </script>

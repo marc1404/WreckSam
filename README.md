@@ -13,6 +13,13 @@
 - `yarn dev`: Development mode with automatic reloading and HMR
 - `yarn build`: Production build for pushing to GitHub Pages
 
+## Development
+Start screen can be changed by setting the Local Storage key `StartScreen`.  
+*Example:*  
+```
+localStorage.setItem('StartScreen', 'MainMenuScreen');
+```
+
 ## Authors
 - Gokie Wiegers
 - Jop Brandenburg

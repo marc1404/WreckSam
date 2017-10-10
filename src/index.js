@@ -3,6 +3,7 @@ import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueAnalytics from 'vue-analytics';
 import App from './App.vue';
 import router from './router';
 import Game from './Game.vue';
@@ -19,6 +20,11 @@ if (process.env.NODE_ENV === 'production') {
 Raven.context(bootstrap);
 
 function bootstrap() {
+    Vue.use(VueAnalytics, {
+        id: 'UA-40279069-6',
+        router: router
+    });
+
     Vue.use(VueRouter);
 
     Vue.component('Game', Game);

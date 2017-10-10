@@ -46,6 +46,7 @@
 </template>
 
 <script>
+    import swal from 'sweetalert2';
     import { userStateService } from './states';
 
     const userState = userStateService.getUserState();

@@ -72,7 +72,7 @@
         transform: translateY(100%);
         animation-name: credits;
         animation-duration: 4s;
-        animation-delay: 0.2s;
+        animation-delay: .5s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
     }

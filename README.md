@@ -1,6 +1,9 @@
 # Wreck Sam
-[Website](https://marc1404.github.io/WreckSam/)  
-Intelligent Interactive Systems, University of Amsterdam
+
+## Quick Facts
+- [Website](https://marc1404.github.io/WreckSam/)
+- **Short URL:** `https://goo.gl/ZGrmU5`
+- Intelligent Interactive Systems, University of Amsterdam
 
 ## Requirements
 - [Node.js](https://nodejs.org/en/) >= `8.0.0`

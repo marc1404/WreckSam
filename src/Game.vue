@@ -1,5 +1,5 @@
 <template>
-    <div id="game"></div>
+    <div id="game" class="w-100 h-100"></div>
 </template>
 
 <script>

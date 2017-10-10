@@ -9,6 +9,9 @@ module.exports = env => {
         output: {
             filename: 'app.js'
         },
+        externals: {
+            'phaser-ce': 'Phaser'
+        },
         module: {
             rules: [
                 {

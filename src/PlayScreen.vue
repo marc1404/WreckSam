@@ -1,11 +1,5 @@
 <template>
-    <div class="p-3">
-        <router-link :to="{ name: 'MainMenuScreen' }">Back</router-link>
-        <div>
-    		<span>Content coming soon!</span>
-    	</div>
-    </div>
-
+    <Game state="level"></Game>
 </template>
 
 <script>

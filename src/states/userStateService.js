@@ -1,5 +1,6 @@
 // @flow
 import UserState from './UserState';
+import Raven from 'raven';
 
 class UserStateService {
 
@@ -10,6 +11,8 @@ class UserStateService {
         const name = data && data.name;
         const age = data && data.age;
         this.userState = new UserState(name, age);
+
+        this.updateUserContext();
     }
 
     getUserState(): UserState {
@@ -22,6 +25,7 @@ class UserStateService {
 
     save() {
         localStorage.setItem('UserState', JSON.stringify(this.userState));
+        this.updateUserContext();
     }
 
     load(): ?Object {
@@ -43,6 +47,22 @@ class UserStateService {
         this.userState.age = null;
 
         localStorage.removeItem('UserState');
+    }
+
+    updateUserContext() {
+        const { name, age } = this.userState;
+
+        if (name) {
+            Raven.setUserContext({
+                username: this.userState.name
+            });
+        }
+
+        if (age) {
+            Raven.setExtraContext({
+                age: this.userState.age
+            });
+        }
     }
 
 }

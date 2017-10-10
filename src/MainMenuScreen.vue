@@ -3,7 +3,7 @@
         <h1 class="infinite-pulse">Wreck Sam</h1>
 
         <div>
-            <router-link :to="{ name: 'PlayScreen' }" class="btn btn-danger btn-lg disabled">
+            <router-link :to="{ name: 'PlayScreen' }" class="btn btn-danger btn-lg">
                 <i class="fa fa-fw fa-heartbeat"></i>
                 Play
             </router-link>

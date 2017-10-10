@@ -16,3 +16,6 @@ Intelligent Interactive Systems, University of Amsterdam
 - Jerom Fernig
 - Maaike Koolbergen
 - Marc Vornetran
+
+## License
+[MIT](https://github.com/marc1404/WreckSam/blob/master/LICENSE)

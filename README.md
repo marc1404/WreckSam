@@ -22,6 +22,3 @@
 
 ## License
 [MIT](https://github.com/marc1404/WreckSam/blob/master/LICENSE)
-
-## QR Code
-![QR Code](assets/images/qr-code.png)

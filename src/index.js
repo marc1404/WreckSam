@@ -9,7 +9,9 @@ import Game from './Game.vue';
 
 if (process.env.NODE_ENV === 'production') {
     Raven
-        .config('https://63f778bcaa9545749f8187b7dde759f6@sentry.io/228420')
+        .config('https://63f778bcaa9545749f8187b7dde759f6@sentry.io/228420', {
+            release: process.env.RELEASE
+        })
         .addPlugin(RavenVue, Vue)
         .install();
 }

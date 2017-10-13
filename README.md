@@ -3,6 +3,8 @@
 ## Quick Facts
 - [Website](https://marc1404.github.io/WreckSam/)
 - **Short URL:** `https://goo.gl/ZGrmU5`
+- [QR Code](https://github.com/marc1404/WreckSam/blob/master/assets/images/qr-code.png)
+- [Architecture Overview](https://github.com/marc1404/WreckSam/blob/master/assets/images/architecture.png)
 - Intelligent Interactive Systems, University of Amsterdam
 
 ## Requirements

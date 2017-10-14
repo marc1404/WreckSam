@@ -14,11 +14,14 @@
             }
         },
         mounted() {
+            document.body.style.backgroundColor = 'black';
             this.game = new WreckSam();
 
             this.game.start(this.state);
         },
         beforeDestroy() {
+            document.body.style.backgroundColor = 'white';
+
             this.game.destroy();
         }
     }

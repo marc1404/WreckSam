@@ -1,6 +1,6 @@
 <template>
     <div class="p-3 h-100 d-flex flex-column justify-content-around text-center">
-        <h1 class="infinite-pulse">Wreck Sam</h1>
+        <img src="assets/images/logo.jpg" class="img-fluid infinite-pulse" />
 
         <div>
             <router-link :to="{ name: 'PlayScreen' }" class="btn btn-danger btn-lg">

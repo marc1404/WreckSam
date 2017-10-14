@@ -1,5 +1,5 @@
 import Phaser from 'phaser-ce';
-import { tissueColor, bacteriaColor } from './constants';
+import { tissueColor, bacteriaColor, boneMarrowColor } from './constants';
 
 export default class TutorialState extends Phaser.State {
 

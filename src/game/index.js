@@ -10,7 +10,6 @@ export default class WreckSam {
         this.game = new Phaser.Game(config);
 
         this.game.state.add('tutorial', new TutorialState());
-        this.game.state.add('level', new LevelState());
     }
 
     start(state) {

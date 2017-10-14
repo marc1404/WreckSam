@@ -1,7 +1,6 @@
 import Phaser from 'phaser-ce';
 import { getConfig } from './config';
 import TutorialState from './TutorialState';
-import LevelState from './LevelState';
 
 export default class WreckSam {
 

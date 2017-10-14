@@ -12,8 +12,8 @@
 - [Yarn](https://yarnpkg.com/lang/en/) *(Alternative package manager for Node.js)*
 
 ## Scripts
-- `yarn dev`: Development mode with automatic reloading and HMR
-- `yarn build`: Production build for pushing to GitHub Pages
+- `yarn dev` Development mode with automatic reloading and HMR
+- `yarn build` Production build for pushing to GitHub Pages
 
 ## Development
 Start screen can be changed by setting the Local Storage key `StartScreen`.  

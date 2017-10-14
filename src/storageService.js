@@ -29,6 +29,14 @@ class StorageService {
         return null;
     }
 
+    remove(key: string) {
+        try {
+            localStorage.removeItem(key);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }
 
 export default new StorageService();

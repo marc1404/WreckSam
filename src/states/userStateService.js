@@ -1,6 +1,7 @@
 // @flow
 import UserState from './UserState';
 import Raven from 'raven-js';
+import storageService from '../storageService';
 
 class UserStateService {
 
@@ -24,29 +25,19 @@ class UserStateService {
     }
 
     save() {
-        localStorage.setItem('UserState', JSON.stringify(this.userState));
+        storageService.set('UserState', this.userState);
         this.updateUserContext();
     }
 
     load(): ?Object {
-        const item: ?string = localStorage.getItem('UserState');
-
-        if (!item) {
-            return null;
-        }
-
-        try {
-            return JSON.parse(item);
-        } catch (error) {
-            console.error(error);
-        }
+        return storageService.get('UserState');
     }
 
     reset() {
         this.userState.name = null;
         this.userState.age = null;
 
-        localStorage.removeItem('UserState');
+        storageService.remove('UserState');
     }
 
     updateUserContext() {

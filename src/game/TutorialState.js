@@ -5,8 +5,22 @@ export default class TutorialState extends Phaser.State {
 
     bacteria = null;
 
+    tissue = {
+        bacteria: null,
+        macrophage: null,
+        neutrophil: null
+    };
+
+    boneMarrow = {
+        macrophage: null,
+        neutrophil: null
+    };
+
     preload() {
         this.game.load.image('bacteria', 'assets/sprites/bacteria.png');
+        this.game.load.image('macrophage', 'assets/sprites/macrophage.png');
+        this.game.load.image('macrophage_active', 'assets/sprites/macrophage_active.png');
+        this.game.load.image('neutrophil', 'assets/sprites/neutrophil.png');
     }
 
     create() {

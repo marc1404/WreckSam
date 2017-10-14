@@ -38,6 +38,7 @@ class UserStateService {
         this.userState.age = null;
 
         storageService.remove('UserState');
+        storageService.remove('splash.skippable');
     }
 
     updateUserContext() {

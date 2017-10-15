@@ -43,10 +43,7 @@
                 }).then(() => {
                     this.$router.push({ name: 'MainMenuScreen' });
                 },(dismiss) => {
-                    if(dismiss=='cancel'){
-                        that.game.unpause();   
-                    }
-                    
+                        that.game.unpause();                       
                 }).catch(() => {});
             }
         }

@@ -16,11 +16,11 @@ export default class WreckSam {
     }
 
     pause(){
-        this.game.lockRender = true;
+        this.game.paused = true;
     }
 
     unpause(){
-        this.game.lockRender = false;
+        this.game.paused = false;
     }
     
     destroy() {

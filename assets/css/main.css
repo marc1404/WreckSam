@@ -3,7 +3,8 @@
     height: 100%;
     background-image: url('../images/body_map.png');
     background-size: cover;
-    background-position: center;
+    background-position-x: center;
+    background-position-y: top;
 }
 
 .main-menu-triangle {

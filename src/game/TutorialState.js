@@ -1,10 +1,10 @@
 import Phaser from 'phaser-ce';
-import { tissueColor, bacteriaColor, boneMarrowColor } from './constants';
+import { tissueColor, boneMarrowColor } from './constants';
 import { modalService } from '../modals';
 
 export default class TutorialState extends Phaser.State {
 
-    timerFactor = 0.1;
+    timerFactor = 1;
 
     health = {
         bar: null,

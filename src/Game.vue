@@ -29,8 +29,8 @@
             this.game.destroy();
         },
         methods:{
-            pause() {
-                this.game.pause();
+         pause() {
+            this.game.pause();
 
                 swal({
                     title: 'Pause',

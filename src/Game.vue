@@ -8,7 +8,7 @@
 <script>
     import WreckSam from './game';
     import swal from 'sweetalert2';
-    
+
     export default {
         name: 'Game',
         props: {
@@ -28,9 +28,9 @@
 
             this.game.destroy();
         },
-        methods:{
-         pause() {
-            this.game.pause();
+        methods: {
+            pause() {
+                this.game.pause();
 
                 swal({
                     title: 'Pause',

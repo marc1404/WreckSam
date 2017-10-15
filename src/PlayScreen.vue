@@ -24,26 +24,6 @@
 </script>
 
 <style scoped>
-    .main-menu-triangle {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 50px 50px 0;
-        border-color: transparent #42bca4 transparent transparent;
-        z-index: 1;
-    }
-
-    .main-menu-icon {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        z-index: 2;
-        pointer-events: none;
-    }
-
     .alert-container {
         padding: 10px;
         width: 100%;

@@ -1,6 +1,6 @@
 <template>
     <div id="game" class="w-100 h-100">
-        <div class="main-menu-triangle" @click="back"></div>
+        <div class="main-menu-triangle" @click="pause"></div>
         <i class="fa fa-pause main-menu-icon" aria-hidden="true"></i>
     </div>
 </template>
@@ -29,7 +29,7 @@
             this.game.destroy();
         },
         methods:{
-         back() {
+         pause() {
             this.game.pause();
             var that = this;
                 swal({

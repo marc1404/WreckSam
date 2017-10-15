@@ -15,6 +15,14 @@ export default class WreckSam {
         this.game.state.start(state);
     }
 
+    pause(){
+        this.game.lockRender = true;
+    }
+
+    unpause(){
+        this.game.lockRender = false;
+    }
+    
     destroy() {
         this.game.destroy();
 

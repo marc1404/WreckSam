@@ -1,10 +1,12 @@
 import Phaser from 'phaser-ce';
-import { tissueColor, boneMarrowColor } from './constants';
+import swal from 'sweetalert2';
+import { tissueColor, boneMarrowColor, bloodColor, bloodColorCSS } from './constants';
 import { modalService } from '../modals';
 
 export default class TutorialState extends Phaser.State {
 
-    timerFactor = 1;
+    modalFactor = 1;
+    isDead = false;
 
     health = {
         bar: null,
@@ -13,7 +15,12 @@ export default class TutorialState extends Phaser.State {
     };
 
     tissue = {
-        bacteria: null,
+        bacteria: {
+            amount: 0,
+            group: null,
+            sprite: null,
+            text: null
+        },
         macrophage: null,
         neutrophil: null
     };
@@ -83,9 +90,17 @@ export default class TutorialState extends Phaser.State {
         const scale = (this.world.width * 0.6) / bacteria.width;
         bacteria.scale.setTo(scale);
 
-        bacteria.visible = false;
+        const text = this.game.add.text(bacteria.centerX, bacteria.centerY / 2, 'x' + this.tissue.bacteria.amount, { font: 'normal 12pt Arial' });
 
-        this.tissue.bacteria = bacteria;
+        const group = this.game.add.group();
+        group.visible = false;
+
+        group.add(bacteria);
+        group.add(text);
+
+        this.tissue.bacteria.group = group;
+        this.tissue.bacteria.sprite = bacteria;
+        this.tissue.bacteria.text = text;
     }
 
     createTissueMacrophage() {
@@ -175,15 +190,35 @@ export default class TutorialState extends Phaser.State {
     }
 
     startBacteriaTimer() {
-        this.time.events.add(Phaser.Timer.SECOND * 2 * this.timerFactor, () => {
-            this.tissue.bacteria.visible = true;
+        this.time.events.add(Phaser.Timer.SECOND * 2 * this.modalFactor, () => {
+            const { bacteria } = this.tissue;
+            bacteria.group.visible = true;
+            bacteria.amount = 1;
 
+            this.startBacteriaGrowthTimer();
+            this.startHealthTimer();
             this.startBacteriaModalTimer();
         });
     }
 
+    startBacteriaGrowthTimer() {
+        this.time.events.loop(Phaser.Timer.QUARTER, () => {
+            const { bacteria } = this.tissue;
+            const growth = Math.floor(1 + Math.log(bacteria.amount));
+            bacteria.amount += growth;
+        });
+    }
+
+    startHealthTimer() {
+        this.time.events.loop(Phaser.Timer.QUARTER, () => {
+            const { bacteria } = this.tissue;
+            const damage = 0.1 + Math.log10(bacteria.amount) * 0.1;
+            this.health.percent -= damage;
+        });
+    }
+
     startBacteriaModalTimer() {
-        this.time.events.add(Phaser.Timer.SECOND * 2 * this.timerFactor, () => {
+        this.time.events.add(Phaser.Timer.SECOND * 2 * this.modalFactor, () => {
            this.showBacteriaModal();
         });
     }
@@ -194,7 +229,7 @@ export default class TutorialState extends Phaser.State {
     }
 
     startMacrophageModalTimer() {
-        this.time.events.add(Phaser.Timer.SECOND * 2 * this.timerFactor, () => {
+        this.time.events.add(Phaser.Timer.SECOND * 3 * this.modalFactor, () => {
             this.showMacrophageModal();
         });
     }
@@ -210,23 +245,47 @@ export default class TutorialState extends Phaser.State {
     update() {
         this.tissue.neutrophil.rotation += 0.02;
 
-        const { bacteria } = this.tissue;
-        bacteria.rotation += bacteria.data.rotation;
+        this.updateBacteria();
+        this.updateHealth();
+    }
 
-        if (bacteria.rotation < 0.25 || bacteria.rotation > 0.75) {
-            bacteria.data.rotation *= -1;
+    updateBacteria() {
+        const { bacteria } = this.tissue;
+        const { sprite } = bacteria;
+        sprite.rotation += sprite.data.rotation;
+
+        if (sprite.rotation < 0.25 || sprite.rotation > 0.75) {
+            sprite.data.rotation *= -1;
         }
 
+        bacteria.text.text = 'x' + bacteria.amount;
+    }
+
+    updateHealth() {
         if (this.health.percent < 0) {
             this.health.percent = 0;
         }
 
-        this.health.text.text = Math.floor(this.health.percent) + '%';
+        const { percent } = this.health;
+
+        let rounded = Math.floor(percent);
+
+        if (percent > 0 && rounded === 0) {
+            rounded = 1;
+        }
+
+        this.health.text.text = rounded + '%';
 
         this.health.bar.clear();
-        this.health.bar.beginFill(0xaf111c);
+        this.health.bar.beginFill(bloodColor);
         this.health.bar.drawRect(0, 0, this.world.width * (this.health.percent / 100), 20);
         this.health.bar.endFill();
+
+        if (!this.isDead && rounded === 0) {
+            this.isDead = true;
+
+            this.time.events.add(Phaser.Timer.QUARTER, () => this.gameOver());
+        }
     }
 
     addMacrophageToTissue() {
@@ -240,7 +299,7 @@ export default class TutorialState extends Phaser.State {
     }
 
     startNeutrophilModalTimer() {
-        this.time.events.add(Phaser.Timer.SECOND * 5 * this.timerFactor, () => {
+        this.time.events.add(Phaser.Timer.SECOND * 5 * this.modalFactor, () => {
             this.showNeutrophilModal();
         });
     }
@@ -254,6 +313,20 @@ export default class TutorialState extends Phaser.State {
 
     addNeutrophilToTissue() {
         this.tissue.neutrophil.visible = true;
+    }
+
+    gameOver() {
+        this.gameOver = true;
+        this.game.paused = true;
+        const toMainMenu = () => this.game.router.push({ name: 'MainMenuScreen' });
+
+        swal({
+            title: 'Game Over',
+            text: 'The body suffered fatal damage from bacteria cells.',
+            type: 'error',
+            confirmButtonText: 'Sorry 😰',
+            confirmButtonColor: bloodColorCSS
+        }).then(toMainMenu).catch(toMainMenu);
     }
 
 }

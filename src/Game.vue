@@ -19,7 +19,7 @@
         },
         mounted() {
             document.body.style.backgroundColor = 'black';
-            this.game = new WreckSam();
+            this.game = new WreckSam(this.$router);
 
             this.game.start(this.state);
         },
@@ -27,6 +27,8 @@
             document.body.style.backgroundColor = 'white';
 
             this.game.destroy();
+
+            this.game = null;
         },
         methods: {
             pause() {

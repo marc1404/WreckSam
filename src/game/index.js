@@ -5,9 +5,10 @@ import { modalService } from '../modals';
 
 export default class WreckSam {
 
-    constructor() {
+    constructor(router) {
         const config = getConfig();
         this.game = new Phaser.Game(config);
+        this.game.router = router;
 
         this.game.state.add('tutorial', new TutorialState());
 
@@ -20,10 +21,18 @@ export default class WreckSam {
     }
 
     pause(){
+        if (!this.game) {
+            return;
+        }
+
         this.game.paused = true;
     }
 
     unpause(){
+        if (!this.game) {
+            return;
+        }
+
         this.game.paused = false;
     }
     

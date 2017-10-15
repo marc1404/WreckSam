@@ -21,14 +21,34 @@ export default class TutorialState extends Phaser.State {
             sprite: null,
             text: null
         },
-        macrophage: null,
-        neutrophil: null
+        macrophage: {
+            amount: 0,
+            group: null,
+            sprite: null,
+            text: null
+        },
+        neutrophil: {
+            amount: 0,
+            group: null,
+            sprite: null,
+            text: null
+        }
     };
 
     boneMarrow = {
         backdrop: null,
-        macrophage: null,
-        neutrophil: null
+        macrophage: {
+            amount: 0,
+            group: null,
+            sprite: null,
+            text: null
+        },
+        neutrophil: {
+            amount: 0,
+            group: null,
+            sprite: null,
+            text: null
+        }
     };
 
     preload() {
@@ -111,14 +131,19 @@ export default class TutorialState extends Phaser.State {
         const scale = (this.world.width * 0.5) / macrophage.width;
         macrophage.scale.setTo(scale);
 
-        macrophage.visible = false;
+        const group = this.game.add.group();
+        group.visible = false;
 
-        this.tissue.macrophage = macrophage;
+        group.add(macrophage);
+
+        this.tissue.macrophage.group = group;
+        this.tissue.macrophage.sprite = macrophage;
+        //this.tissue.bacteria.text = text;
     }
 
     createTissueMacrophageAnimation() {
         this.time.events.loop(Phaser.Timer.QUARTER * 2, () => {
-            const { macrophage } = this.tissue;
+            const macrophage = this.tissue.macrophage.sprite;
             const key = macrophage.key === 'macrophage' ? 'macrophage_active' : 'macrophage';
 
             macrophage.loadTexture(key);
@@ -133,9 +158,13 @@ export default class TutorialState extends Phaser.State {
         const scale = (this.world.width * 0.4) / neutrophil.width;
         neutrophil.scale.setTo(scale);
 
-        neutrophil.visible = false;
+        const group = this.game.add.group();
+        group.visible = false;
 
-        this.tissue.neutrophil = neutrophil;
+        group.add(neutrophil);
+
+        this.tissue.neutrophil.group = group;
+        this.tissue.neutrophil.sprite = neutrophil;
     }
 
     createBoneMarrow() {
@@ -165,28 +194,38 @@ export default class TutorialState extends Phaser.State {
         const scale = (backdrop.height * 0.8) / macrophage.height;
         macrophage.scale.setTo(scale);
 
-        macrophage.visible = false;
         macrophage.inputEnabled = true;
 
         macrophage.events.onInputDown.add(() => this.addMacrophageToTissue());
 
-        this.boneMarrow.macrophage = macrophage;
+        const group = this.game.add.group();
+        group.visible = false;
+
+        group.add(macrophage);
+
+        this.boneMarrow.macrophage.group = group;
+        this.boneMarrow.macrophage.sprite = macrophage;
     }
 
     createBoneMarrowNeutrophil() {
         const { backdrop, macrophage } = this.boneMarrow;
-        const x = backdrop.width - macrophage.x;
+        const x = backdrop.width - macrophage.sprite.x;
         const neutrophil = this.createNeutrophil(x, backdrop.centerY);
 
         const scale = (backdrop.height * 0.9) / neutrophil.height;
         neutrophil.scale.setTo(scale);
 
-        neutrophil.visible = false;
         neutrophil.inputEnabled = true;
 
         neutrophil.events.onInputDown.add(() => this.addNeutrophilToTissue());
 
-        this.boneMarrow.neutrophil = neutrophil;
+        const group = this.game.add.group();
+        group.visible = false;
+
+        group.add(neutrophil);
+
+        this.boneMarrow.neutrophil.group = group;
+        this.boneMarrow.neutrophil.sprite = neutrophil;
     }
 
     startBacteriaTimer() {
@@ -238,12 +277,12 @@ export default class TutorialState extends Phaser.State {
         modalService.showMacrophageModal()
             .then(() => {
                 this.boneMarrow.backdrop.visible = true;
-                this.boneMarrow.macrophage.visible = true;
+                this.boneMarrow.macrophage.group.visible = true;
             });
     }
 
     update() {
-        this.tissue.neutrophil.rotation += 0.02;
+        this.tissue.neutrophil.sprite.rotation += 0.02;
 
         this.updateBacteria();
         this.updateHealth();
@@ -291,8 +330,8 @@ export default class TutorialState extends Phaser.State {
     addMacrophageToTissue() {
         const { macrophage } = this.tissue;
 
-        if (!macrophage.visible) {
-            macrophage.visible = true;
+        if (!macrophage.group.visible) {
+            macrophage.group.visible = true;
 
             this.startNeutrophilModalTimer();
         }
@@ -307,12 +346,12 @@ export default class TutorialState extends Phaser.State {
     showNeutrophilModal() {
         modalService.showNeutrophilModal()
             .then(() => {
-                this.boneMarrow.neutrophil.visible = true;
+                this.boneMarrow.neutrophil.group.visible = true;
             });
     }
 
     addNeutrophilToTissue() {
-        this.tissue.neutrophil.visible = true;
+        this.tissue.neutrophil.group.visible = true;
     }
 
     gameOver() {

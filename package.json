@@ -21,7 +21,7 @@
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "raven-js": "3.18.1",
-    "sweetalert2": "6.10.2",
+    "sweetalert2": "6.10.3",
     "vue": "2.5.2",
     "vue-analytics": "5.1.1",
     "vue-router": "3.0.1"

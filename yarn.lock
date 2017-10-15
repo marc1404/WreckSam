@@ -3945,9 +3945,9 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-sweetalert2@6.10.2:
-  version "6.10.2"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.10.2.tgz#2fdd0d70027d142a08b6b96d4525c71fddfcfe85"
+sweetalert2@6.10.3:
+  version "6.10.3"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.10.3.tgz#a869fd18076a7419077301040715e2625f859729"
 
 tapable@^0.2.7:
   version "0.2.8"

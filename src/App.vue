@@ -5,6 +5,7 @@
                 <router-view></router-view>
             </transition>
         </div>
+        <Modal />
     </div>
 </template>
 

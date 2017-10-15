@@ -7,6 +7,7 @@ import VueAnalytics from 'vue-analytics';
 import App from './App.vue';
 import router from './router';
 import Game from './Game.vue';
+import { Modal } from './modals';
 
 if (process.env.NODE_ENV === 'production') {
     Raven
@@ -27,6 +28,7 @@ function bootstrap() {
 
     Vue.use(VueRouter);
 
+    Vue.component('Modal', Modal);
     Vue.component('Game', Game);
 
     new Vue({

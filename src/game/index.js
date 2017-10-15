@@ -1,6 +1,7 @@
 import Phaser from 'phaser-ce';
 import { getConfig } from './config';
 import TutorialState from './TutorialState';
+import { modalService } from '../modals';
 
 export default class WreckSam {
 
@@ -9,6 +10,9 @@ export default class WreckSam {
         this.game = new Phaser.Game(config);
 
         this.game.state.add('tutorial', new TutorialState());
+
+        modalService.onShow(() => this.pause());
+        modalService.onHide(() => this.unpause());
     }
 
     start(state) {

@@ -23,7 +23,6 @@
         },
         created() {
             const startScreen = localStorage.getItem('StartScreen') || 'SplashScreen';
-            const TutorialScreen = localStorage.getItem('TutorialScreen') || 'TutorialScreen';
 
             this.$router.push({ name: startScreen });
         }

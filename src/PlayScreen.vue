@@ -1,7 +1,7 @@
 <template>
     <div class="body-map">
         <div class="main-menu-triangle" @click="back"></div>
-        <i class="fa fa-pause main-menu-icon" aria-hidden="true"></i>
+        <i class="fa fa-times main-menu-icon" aria-hidden="true"></i>
 
         <div class="alert-container">
             <div class="alert alert-primary mb-0" role="alert">

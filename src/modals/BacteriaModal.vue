@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-body">
             <p class="mb-0">
-                <strong>Oh no!</strong> Harmful bacteria cells have entered the body.
+                <strong>Oh no!</strong> <span class="text-danger">Harmful bacteria</span> cells have entered the body.
             </p>
         </div>
         <div class="modal-footer">

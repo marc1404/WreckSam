@@ -10,8 +10,8 @@
             </div>
 
             <p class="mb-0">
-                <strong>Neutrophils</strong> are much more efficient at killing bacteria.
-                However, the toxins they release also kill healthy human cells. <br />
+                <strong>Neutrophils</strong> are much <span class="text-success">more efficient at killing bacteria</span>.
+                However, the <span class="text-danger">toxins</span> they release also <span class="text-danger">kill healthy human cells</span>. <br />
                 Touch the <strong>Neutrophil</strong> in the <strong>bone marrow</strong>.
             </p>
         </div>

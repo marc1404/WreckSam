@@ -3,7 +3,7 @@
         <div class="modal-body">
             <p class="mb-0">
                 <strong>Macrophages</strong> are your first line of defense.
-                These large cells feast on bacteria cells. <br />
+                These large cells <span class="text-success">feast on bacteria cells</span>. <br />
             </p>
 
             <div class="text-center">

@@ -1,6 +1,6 @@
 <template>
     <div id="game" class="w-100 h-100">
-        <div class="main-menu-triangle" @click="back"></div>
+        <div class="main-menu-triangle" @click="pause"></div>
         <i class="fa fa-pause main-menu-icon" aria-hidden="true"></i>
     </div>
 </template>
@@ -29,9 +29,9 @@
             this.game.destroy();
         },
         methods:{
-         back() {
-            this.game.pause();
-            var that = this;
+            pause() {
+                this.game.pause();
+
                 swal({
                     title: 'Pause',
                     text: 'Going back to the menu will cause lost progress.',
@@ -41,10 +41,10 @@
                     confirmButtonText: 'Back to main menu',
                     cancelButtonText: 'Back to the game'
                 }).then(() => {
-                    this.$router.push({ name: 'MainMenuScreen' });
-                },(dismiss) => {
-                        that.game.unpause();                       
-                }).catch(() => {});
+                    this.$router.push({name: 'MainMenuScreen'});
+                }).catch(() => {
+                    this.game.unpause();
+                });
             }
         }
     }

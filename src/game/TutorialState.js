@@ -38,13 +38,13 @@ export default class TutorialState extends Phaser.State {
     boneMarrow = {
         backdrop: null,
         macrophage: {
-            amount: 0,
+            amount: 1000,
             group: null,
             sprite: null,
             text: null
         },
         neutrophil: {
-            amount: 0,
+            amount: 1000,
             group: null,
             sprite: null,
             text: null
@@ -131,14 +131,17 @@ export default class TutorialState extends Phaser.State {
         const scale = (this.world.width * 0.5) / macrophage.width;
         macrophage.scale.setTo(scale);
 
+        const text = this.game.add.text(macrophage.centerX, macrophage.bottom + 25, 'x' + this.tissue.macrophage.amount, { font: 'normal 12pt Arial' });
+
         const group = this.game.add.group();
         group.visible = false;
 
         group.add(macrophage);
+        group.add(text);
 
         this.tissue.macrophage.group = group;
         this.tissue.macrophage.sprite = macrophage;
-        //this.tissue.bacteria.text = text;
+        this.tissue.macrophage.text = text;
     }
 
     createTissueMacrophageAnimation() {
@@ -158,13 +161,17 @@ export default class TutorialState extends Phaser.State {
         const scale = (this.world.width * 0.4) / neutrophil.width;
         neutrophil.scale.setTo(scale);
 
+        const text = this.game.add.text(neutrophil.centerX, neutrophil.bottom, 'x' + this.tissue.neutrophil.amount, { font: 'normal 12pt Arial' });
+
         const group = this.game.add.group();
         group.visible = false;
 
         group.add(neutrophil);
+        group.add(text);
 
         this.tissue.neutrophil.group = group;
         this.tissue.neutrophil.sprite = neutrophil;
+        this.tissue.neutrophil.text = text;
     }
 
     createBoneMarrow() {
@@ -198,13 +205,17 @@ export default class TutorialState extends Phaser.State {
 
         macrophage.events.onInputDown.add(() => this.addMacrophageToTissue());
 
+        const text = this.game.add.text(macrophage.centerX, macrophage.bottom - 5, 'x' + this.boneMarrow.macrophage.amount, { font: 'normal 12pt Arial' });
+
         const group = this.game.add.group();
         group.visible = false;
 
         group.add(macrophage);
+        group.add(text);
 
         this.boneMarrow.macrophage.group = group;
         this.boneMarrow.macrophage.sprite = macrophage;
+        this.boneMarrow.macrophage.text = text;
     }
 
     createBoneMarrowNeutrophil() {
@@ -219,13 +230,17 @@ export default class TutorialState extends Phaser.State {
 
         neutrophil.events.onInputDown.add(() => this.addNeutrophilToTissue());
 
+        const text = this.game.add.text(neutrophil.centerX, neutrophil.bottom - 10, 'x' + this.boneMarrow.neutrophil.amount, { font: 'normal 12pt Arial' });
+
         const group = this.game.add.group();
         group.visible = false;
 
         group.add(neutrophil);
+        group.add(text);
 
         this.boneMarrow.neutrophil.group = group;
         this.boneMarrow.neutrophil.sprite = neutrophil;
+        this.boneMarrow.neutrophil.text = text;
     }
 
     startBacteriaTimer() {
@@ -243,16 +258,17 @@ export default class TutorialState extends Phaser.State {
     startBacteriaGrowthTimer() {
         this.time.events.loop(Phaser.Timer.QUARTER, () => {
             const { bacteria } = this.tissue;
-            const growth = Math.floor(1 + Math.log(bacteria.amount));
-            bacteria.amount += growth;
+            bacteria.amount += this.calculateBacteriaGrowth();
+
+            if (bacteria.amount < 0) {
+                bacteria.amount = 0;
+            }
         });
     }
 
     startHealthTimer() {
         this.time.events.loop(Phaser.Timer.QUARTER, () => {
-            const { bacteria } = this.tissue;
-            const damage = 0.1 + Math.log10(bacteria.amount) * 0.1;
-            this.health.percent -= damage;
+            this.health.percent -= this.calculateDamage();
         });
     }
 
@@ -286,6 +302,8 @@ export default class TutorialState extends Phaser.State {
 
         this.updateBacteria();
         this.updateHealth();
+        this.updateMacrophage();
+        this.updateNeutrophil();
     }
 
     updateBacteria() {
@@ -298,6 +316,12 @@ export default class TutorialState extends Phaser.State {
         }
 
         bacteria.text.text = 'x' + bacteria.amount;
+
+        if (bacteria.group.visible && bacteria.amount <= 0) {
+            bacteria.group.visible = false;
+
+            this.time.events.add(Phaser.Timer.SECOND, () => this.win());
+        }
     }
 
     updateHealth() {
@@ -323,16 +347,37 @@ export default class TutorialState extends Phaser.State {
         if (!this.isDead && rounded === 0) {
             this.isDead = true;
 
-            this.time.events.add(Phaser.Timer.QUARTER, () => this.gameOver());
+            this.time.events.add(Phaser.Timer.SECOND, () => this.gameOver());
         }
     }
 
+    updateMacrophage() {
+        this.tissue.macrophage.text.text = 'x' + this.tissue.macrophage.amount;
+        this.boneMarrow.macrophage.text.text = 'x' + this.boneMarrow.macrophage.amount;
+    }
+
+    updateNeutrophil() {
+        this.tissue.neutrophil.text.text = 'x' + this.tissue.neutrophil.amount;
+        this.boneMarrow.neutrophil.text.text = 'x' + this.boneMarrow.neutrophil.amount;
+    }
+
     addMacrophageToTissue() {
-        const { macrophage } = this.tissue;
+        const inTissue = this.tissue.macrophage;
+        const inBoneMarrow = this.boneMarrow.macrophage;
 
-        if (!macrophage.group.visible) {
-            macrophage.group.visible = true;
+        if (inBoneMarrow.amount <= 0) {
+            return;
+        }
 
+        if (!inTissue.group.visible) {
+            inTissue.group.visible = true;
+        }
+
+        inTissue.amount += 100;
+        inBoneMarrow.amount -= 100;
+        inBoneMarrow.group.visible = inBoneMarrow.amount > 0;
+
+        if (inBoneMarrow.amount === 0) {
             this.startNeutrophilModalTimer();
         }
     }
@@ -351,21 +396,87 @@ export default class TutorialState extends Phaser.State {
     }
 
     addNeutrophilToTissue() {
-        this.tissue.neutrophil.group.visible = true;
+        const inTissue = this.tissue.neutrophil;
+        const inBoneMarrow = this.boneMarrow.neutrophil;
+
+        if (inBoneMarrow.amount <= 0) {
+            return;
+        }
+
+        inTissue.group.visible = true;
+        inTissue.amount += 100;
+        inBoneMarrow.amount -= 100;
+        inBoneMarrow.group.visible = inBoneMarrow.amount > 0;
+    }
+
+    calculateBacteriaGrowth() {
+        const bacterias = this.tissue.bacteria.amount;
+        const macrophages = this.tissue.macrophage.amount;
+        const neutrophils = this.tissue.neutrophil.amount;
+        let growth = 1;
+
+        if (bacterias > 0) {
+            growth += Math.log(bacterias);
+        }
+
+        if (macrophages > 0) {
+            growth *= 1 - 0.9 * (macrophages / 1000);
+
+            if (growth < 1) {
+                growth = 1;
+            }
+        }
+
+        if (neutrophils > 0) {
+            const factor = 2 + 2 * (neutrophils / 1000);
+            growth *= -factor;
+        }
+
+        return Math.floor(growth);
+    }
+
+    calculateDamage() {
+        const bacterias = this.tissue.bacteria.amount;
+        const neutrophils = this.tissue.neutrophil.amount;
+        let damage = 0.1;
+
+        if (bacterias > 0) {
+            damage += Math.log10(bacterias) * 0.1;
+        }
+
+        if (neutrophils > 0) {
+            damage += neutrophils / 500;
+        }
+
+        return damage;
     }
 
     gameOver() {
         this.gameOver = true;
         this.game.paused = true;
-        const toMainMenu = () => this.game.router.push({ name: 'MainMenuScreen' });
 
         swal({
             title: 'Game Over',
-            text: 'The body suffered fatal damage from bacteria cells.',
+            text: 'The body suffered fatal damage.',
             type: 'error',
             confirmButtonText: 'Sorry 😰',
             confirmButtonColor: bloodColorCSS
-        }).then(toMainMenu).catch(toMainMenu);
+        }).then(() => this.toMainMenu()).catch(() => this.toMainMenu());
+    }
+
+    win() {
+        this.game.paused = true;
+
+        swal({
+            title: 'Infection healed!',
+            text: 'The immune system eradicated all bacteria cells.',
+            type: 'success',
+            confirmButtonText: 'Well done 🎉'
+        }).then(() => this.toMainMenu()).catch(() => this.toMainMenu());
+    }
+
+    toMainMenu() {
+        this.game.router.push({ name: 'MainMenuScreen' });
     }
 
 }

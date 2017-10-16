@@ -10,6 +10,8 @@
 </template>
 
 <script>
+    import storageService from './storageService';
+
     export default {
         name: 'App',
         data() {
@@ -23,7 +25,7 @@
             }
         },
         created() {
-            const startScreen = localStorage.getItem('StartScreen') || 'SplashScreen';
+            const startScreen = storageService.get('StartScreen') || 'SplashScreen';
 
             this.$router.push({ name: startScreen });
         }

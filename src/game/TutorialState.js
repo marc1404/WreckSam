@@ -94,12 +94,14 @@ export default class TutorialState extends Phaser.State {
 
     createTissue() {
         this.stage.backgroundColor = tissueColor;
+        
 
         this.createTissueBacteria();
         this.createTissueMacrophageAnimation();
 
         this.createTissueMacrophage();
         this.createTissueNeutrophil();
+        modalService.showInitialExplanationModal();
     }
 
     createTissueBacteria() {
@@ -280,14 +282,26 @@ export default class TutorialState extends Phaser.State {
 
     showBacteriaModal() {
         modalService.showBacteriaModal()
-            .then(() => this.startMacrophageModalTimer());
+            .then(() => this.startBacteriaOverloadModalTimer());
     }
 
-    startMacrophageModalTimer() {
+    startBacteriaOverloadModalTimer() {
         this.time.events.add(Phaser.Timer.SECOND * 3 * this.modalFactor, () => {
-            this.showMacrophageModal();
+            this.showBacteriaOverloadModal();
         });
     }
+
+    showBacteriaOverloadModal() {
+        modalService.showBacteriaOverloadModal()
+            .then(() => this.showMacrophageModal());
+    }
+
+    // startMacrophageModalTimer() {
+    //     this.time.events.add(Phaser.Timer.SECOND * 3 * this.modalFactor, () => {
+    //         this.showBacteriaOverloadModal();
+    //         this.showMacrophageModal();
+    //     });
+    // }
 
     showMacrophageModal() {
         modalService.showMacrophageModal()
@@ -445,7 +459,7 @@ export default class TutorialState extends Phaser.State {
         }
 
         if (neutrophils > 0) {
-            damage += neutrophils / 500;
+            damage += neutrophils / 300;
         }
 
         return damage;
@@ -457,7 +471,7 @@ export default class TutorialState extends Phaser.State {
 
         swal({
             title: 'Game Over',
-            text: 'The body suffered fatal damage.',
+            text: 'You deployed too many Neutrophils, causing the body to take too much damage. Remember: Their toxins cause damage to bacteria, but also to the human body!',
             type: 'error',
             confirmButtonText: 'Sorry 😰',
             confirmButtonColor: bloodColorCSS

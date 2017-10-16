@@ -1,5 +1,8 @@
 <template>
     <div class="h-100">
+        <div class="main-menu-triangle" @click="back"></div>
+        <i class="fa fa-times main-menu-icon" aria-hidden="true"></i>
+
         <div class="h-100 p-3 d-flex flex-column justify-content-around text-center credits-animation">
             <div>
                 <h2 class="text-secondary">A game by</h2>
@@ -45,19 +48,18 @@
                 Amsterdam, The Netherlands
             </p>
 
-            <div>
-                <router-link :to="{ name: 'MainMenuScreen' }" class="btn btn-sm btn-dark">
-                    <i class="fa fa-fw fa-chevron-left"></i>
-                    Back
-                </router-link>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'CreditsScreen'
+        name: 'CreditsScreen',
+        methods: {
+            back() {
+                this.$router.push({ name: 'MainMenuScreen' });
+            }
+        }
     };
 </script>
 

@@ -471,9 +471,9 @@ export default class TutorialState extends Phaser.State {
 
         swal({
             title: 'Game Over',
-            text: 'You deployed too many Neutrophils, causing the body to take too much damage. Remember: Their toxins cause damage to bacteria, but also to the human body!',
+            text: 'Your body took too much damage and died.',
             type: 'error',
-            confirmButtonText: 'Sorry 😰',
+            confirmButtonText: 'Oh no! I will try again 😰',
             confirmButtonColor: bloodColorCSS
         }).then(() => this.toMainMenu()).catch(() => this.toMainMenu());
     }

@@ -16,7 +16,7 @@
             </p>
 
             <p>
-                For now everything seems fine! Just sit back and relax 🤗
+                For now everything seems fine, sit back and relax 🤗
             </p>
         </div>
         <div class="modal-footer">

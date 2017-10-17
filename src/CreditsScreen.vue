@@ -2,8 +2,8 @@
     <div class="h-100">
         <div class="h-100 p-3 d-flex flex-column justify-content-around text-center credits-animation">
             <div>
-                <h2 class="text-secondary">A game by</h2>
-                <h1>
+                <h2 class="text-secondary light">A game by</h2>
+                <h1 class="light">
                     <i class="fa fa-fw fa-file-o"></i>
                     Carte Blanche
                 </h1>
@@ -67,6 +67,10 @@
 </script>
 
 <style scoped>
+    .light {
+        font-weight: 300;
+    }
+
     img {
         width: 28px;
         height: 40px;

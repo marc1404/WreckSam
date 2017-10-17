@@ -27,9 +27,11 @@ class ModalService {
     showBacteriaOverloadModal(){
         return this.showModal('BacteriaOverloadModal')
     }
+
     showInitialExplanationModal(){
         return this.showModal('InitialExplanationModal')
     }
+
     showModal(componentName) {
         this.componentName = componentName;
 

@@ -1,8 +1,5 @@
 <template>
     <div class="h-100">
-        <div class="main-menu-triangle" @click="back"></div>
-        <i class="fa fa-times main-menu-icon" aria-hidden="true"></i>
-
         <div class="h-100 p-3 d-flex flex-column justify-content-around text-center credits-animation">
             <div>
                 <h2 class="text-secondary">A game by</h2>
@@ -37,7 +34,7 @@
                 Marc Vornetran
             </a>
 
-            <p class="lead">
+            <p class="lead hide-xxs">
                 Intelligent Interactive Systems <br>
                 Human Centred Multimedia <br>
                 <a href="http://gss.uva.nl/content/masters/information-studies-information-systems/study-programme/study-programme.html">M.Sc. Information Studies</a>
@@ -48,6 +45,12 @@
                 Amsterdam, The Netherlands
             </p>
 
+            <div>
+                <router-link :to="{ name: 'MainMenuScreen' }" class="btn btn-dark">
+                    <i class="fa fa-fw fa-chevron-left" aria-hidden="true"></i>
+                    Back
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -86,6 +89,12 @@
 
         100% {
             transform: translateY(0);
+        }
+    }
+
+    @media (max-height: 500px) {
+        .hide-xxs {
+            display: none;
         }
     }
 </style>

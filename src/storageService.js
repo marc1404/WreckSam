@@ -13,14 +13,24 @@ class StorageService {
         return true;
     }
 
-    get(key: string): ?Object {
+    get(key: string): ?string {
         try {
-            const item = localStorage.getItem(key);
+            return localStorage.getItem(key);
+        } catch (error) {
+            console.error(error);
+        }
 
-            if (!item) {
-                return null;
-            }
+        return null;
+    }
 
+    parse(key: string): ?Object {
+        const item = this.get(key);
+
+        if (!item) {
+            return null;
+        }
+
+        try {
             return JSON.parse(item);
         } catch (error) {
             console.error(error);

@@ -30,7 +30,7 @@ class UserStateService {
     }
 
     load(): ?Object {
-        return storageService.get('UserState');
+        return storageService.parse('UserState');
     }
 
     reset() {

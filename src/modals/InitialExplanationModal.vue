@@ -12,10 +12,7 @@
 
             <p>
                 The <span class="text-success">health bar</span> at the top of your screen indicates how you are doing.
-                Make sure it doesn't drop to <span class="text-danger">zero</span>!
-            </p>
-
-            <p>
+                Make sure it doesn't drop to <span class="text-danger">zero</span>! <br />
                 For now everything seems fine, sit back and relax 🤗
             </p>
         </div>

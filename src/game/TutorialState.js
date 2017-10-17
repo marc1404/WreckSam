@@ -64,7 +64,7 @@ export default class TutorialState extends Phaser.State {
         this.createHealth();
         this.createTissue();
         this.createBoneMarrow();
-        this.startBacteriaTimer();
+        this.startInitialExplanationTimer();
     }
 
     createHealth() {
@@ -101,7 +101,6 @@ export default class TutorialState extends Phaser.State {
 
         this.createTissueMacrophage();
         this.createTissueNeutrophil();
-        modalService.showInitialExplanationModal();
     }
 
     createTissueBacteria() {
@@ -245,6 +244,13 @@ export default class TutorialState extends Phaser.State {
         this.boneMarrow.neutrophil.text = text;
     }
 
+    startInitialExplanationTimer() {
+        this.time.events.add(Phaser.Timer.SECOND * this.modalFactor, () => {
+            modalService.showInitialExplanationModal()
+                .then(() => this.startBacteriaTimer());
+        });
+    }
+
     startBacteriaTimer() {
         this.time.events.add(Phaser.Timer.SECOND * 2 * this.modalFactor, () => {
             const { bacteria } = this.tissue;
@@ -295,13 +301,6 @@ export default class TutorialState extends Phaser.State {
         modalService.showBacteriaOverloadModal()
             .then(() => this.showMacrophageModal());
     }
-
-    // startMacrophageModalTimer() {
-    //     this.time.events.add(Phaser.Timer.SECOND * 3 * this.modalFactor, () => {
-    //         this.showBacteriaOverloadModal();
-    //         this.showMacrophageModal();
-    //     });
-    // }
 
     showMacrophageModal() {
         modalService.showMacrophageModal()
@@ -470,10 +469,10 @@ export default class TutorialState extends Phaser.State {
         this.game.paused = true;
 
         swal({
-            title: 'Game Over',
-            text: 'Your body took too much damage and died.',
+            title: 'Game Over ☠️',
+            text: 'Your body sustained fatal damage.️',
             type: 'error',
-            confirmButtonText: 'Oh no! I will try again 😰',
+            confirmButtonText: 'Try again. 😰',
             confirmButtonColor: bloodColorCSS
         }).then(() => this.toMainMenu()).catch(() => this.toMainMenu());
     }

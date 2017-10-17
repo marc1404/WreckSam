@@ -9,12 +9,10 @@
             <div class="text-center">
                 <img style="width: 200px" src="assets/sprites/macrophage.png" />
             </div>
-            <p class="mb-0">
-            Touch the <strong>Macrophage</strong> in the white area at the bottom of your screen, which is the <strong>bone marrow</strong> in order to deploy 100 Macrophages to the <strong>body tissue</strong>, where they will attack the bacteria.
-            </p>
-            <br />
+
             <p>
-            Touch the <strong>Macrophage</strong> in the <strong>bone marrow</strong> multiple times to deploy 100 Macrophages each time, thus reinforcing your offence. And remember: Offence is always the best defence.
+                Touch the <strong>Macrophage</strong> inside the <strong>bone marrow</strong> <i>(white area)</i> at the bottom of your screen.
+                This will deploy <code>100</code> Macrophage cells each to the tissue.
             </p>
         </div>
         <div class="modal-footer justify-content-between">
@@ -22,7 +20,7 @@
                 <i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>
                 More information
             </a>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Let's do it!</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
         </div>
     </div>
 </template>

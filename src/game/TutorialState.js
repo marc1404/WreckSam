@@ -441,7 +441,7 @@ export default class TutorialState extends Phaser.State {
         }
 
         if (neutrophils > 0) {
-            const factor = 2 + 2 * (neutrophils / 1000);
+            const factor = 3 + 3 * (neutrophils / 1000);
             growth *= -factor;
         }
 
@@ -458,7 +458,7 @@ export default class TutorialState extends Phaser.State {
         }
 
         if (neutrophils > 0) {
-            damage += neutrophils / 300;
+            damage += neutrophils / 500;
         }
 
         return damage;

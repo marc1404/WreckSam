@@ -6,6 +6,7 @@
 - [QR Code](https://github.com/marc1404/WreckSam/blob/master/assets/images/qr-code.png)
 - [Architecture Overview](https://github.com/marc1404/WreckSam/blob/master/assets/images/architecture.png)
 - [Poster](https://github.com/marc1404/WreckSam/blob/master/assets/documents/poster.pdf)
+- [Paper](https://github.com/marc1404/WreckSam/blob/master/assets/documents/paper.pdf)
 - Intelligent Interactive Systems, University of Amsterdam
 
 ## Requirements
